@@ -2,22 +2,15 @@ const chart = document.getElementById("chart");
 const newBtn = document.getElementById("newBtn");
 const bubbleSortBtn = document.getElementById("bubbleSort");
 const mergeSortBtn = document.getElementById("mergeSort");
-const incSpeedBtn = document.getElementById("incSpeed");
-const decSpeedBtn = document.getElementById("decSpeed");
+const speedSlider = document.getElementById("speedSlider");
 
 let barArray;
 const ARRAY_SIZE = 160;
-let speed = 10;
+let speed = 100 / speedSlider.value;
 
-incSpeedBtn.addEventListener("click", () => {
-	if (speed === 0) return;
-	speed = speed / 2;
-});
-
-decSpeedBtn.addEventListener("click", () => {
-	if (speed >= 2000) return;
-	speed = speed * 2;
-});
+speedSlider.oninput = function () {
+	speed = 100 / this.value;
+};
 
 async function sleep(milliseconds) {
 	return new Promise((res) => setTimeout(res, milliseconds));
@@ -69,7 +62,7 @@ async function bubbleSort() {
 				bars[j].style.backgroundColor = "black";
 			}
 		}
-		bars[j].style.backgroundColor = "limegreen";
+		bars[j].style.backgroundColor = "#00fd0a";
 	}
 }
 
@@ -118,18 +111,18 @@ async function mergeSort() {
 				await sleep(speed);
 
 				bars[k].style.height = `${h2}px`;
-				bars[k].style.backgroundColor = "limegreen";
-				bars[i + leftStart].style.backgroundColor = "limegreen";
-				bars[j + rightStart].style.backgroundColor = "limegreen";
+				bars[k].style.backgroundColor = "#00fd0a";
+				bars[i + leftStart].style.backgroundColor = "#00fd0a";
+				bars[j + rightStart].style.backgroundColor = "#00fd0a";
 				k++;
 				j++;
 			} else {
 				await sleep(speed);
 
 				bars[k].style.height = `${h1}px`;
-				bars[k].style.backgroundColor = "limegreen";
-				bars[i + leftStart].style.backgroundColor = "limegreen";
-				bars[j + rightStart].style.backgroundColor = "limegreen";
+				bars[k].style.backgroundColor = "#00fd0a";
+				bars[i + leftStart].style.backgroundColor = "#00fd0a";
+				bars[j + rightStart].style.backgroundColor = "#00fd0a";
 				k++;
 				i++;
 			}
@@ -138,12 +131,12 @@ async function mergeSort() {
 
 		while (i < leftN) {
 			await sleep(speed);
-			bars[k].style.backgroundColor = "limegreen";
+			bars[k].style.backgroundColor = "#00fd0a";
 			bars[k++].style.height = `${leftArray[i++]}px`;
 		}
 		while (j < rightN) {
 			await sleep(speed);
-			bars[k].style.backgroundColor = "limegreen";
+			bars[k].style.backgroundColor = "#00fd0a";
 			bars[k++].style.height = `${rightArray[j++]}px`;
 		}
 		parray = [];
