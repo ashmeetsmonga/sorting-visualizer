@@ -69,7 +69,7 @@ async function bubbleSort() {
 				bars[j].style.backgroundColor = "black";
 			}
 		}
-		bars[j].style.backgroundColor = "rgb(0, 104, 216)";
+		bars[j].style.backgroundColor = "limegreen";
 	}
 }
 
@@ -118,18 +118,18 @@ async function mergeSort() {
 				await sleep(speed);
 
 				bars[k].style.height = `${h2}px`;
-				bars[k].style.backgroundColor = "rgb(0, 104, 216)";
-				bars[i + leftStart].style.backgroundColor = "rgb(0, 104, 216)";
-				bars[j + rightStart].style.backgroundColor = "rgb(0, 104, 216)";
+				bars[k].style.backgroundColor = "limegreen";
+				bars[i + leftStart].style.backgroundColor = "limegreen";
+				bars[j + rightStart].style.backgroundColor = "limegreen";
 				k++;
 				j++;
 			} else {
 				await sleep(speed);
 
 				bars[k].style.height = `${h1}px`;
-				bars[k].style.backgroundColor = "rgb(0, 104, 216)";
-				bars[i + leftStart].style.backgroundColor = "rgb(0, 104, 216)";
-				bars[j + rightStart].style.backgroundColor = "rgb(0, 104, 216)";
+				bars[k].style.backgroundColor = "limegreen";
+				bars[i + leftStart].style.backgroundColor = "limegreen";
+				bars[j + rightStart].style.backgroundColor = "limegreen";
 				k++;
 				i++;
 			}
@@ -138,12 +138,12 @@ async function mergeSort() {
 
 		while (i < leftN) {
 			await sleep(speed);
-			bars[k].style.backgroundColor = "rgb(0, 104, 216)";
+			bars[k].style.backgroundColor = "limegreen";
 			bars[k++].style.height = `${leftArray[i++]}px`;
 		}
 		while (j < rightN) {
 			await sleep(speed);
-			bars[k].style.backgroundColor = "rgb(0, 104, 216)";
+			bars[k].style.backgroundColor = "limegreen";
 			bars[k++].style.height = `${rightArray[j++]}px`;
 		}
 		parray = [];
