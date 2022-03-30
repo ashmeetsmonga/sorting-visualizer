@@ -11,7 +11,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     background-color: var(--color-bg)
 }
 
@@ -115,8 +115,8 @@ header h1 {
 }
 
 .bar {
-    width: 7.5px;
-    margin: 0 1.125px;
+    /* width: 7.5px; */
+    /* margin: 0 1.125px; */
     background-color: var(--color-primary);
 }
 

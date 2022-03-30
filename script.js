@@ -3,13 +3,26 @@ const newBtn = document.getElementById("newBtn");
 const bubbleSortBtn = document.getElementById("bubbleSort");
 const mergeSortBtn = document.getElementById("mergeSort");
 const speedSlider = document.getElementById("speedSlider");
+const sizeSlider = document.getElementById("sizeSlider");
 
 let barArray;
-const ARRAY_SIZE = 160;
+const TOTAL_WIDTH = 1200;
+let margin = 0.5 * sizeSlider.value;
+let barWidth = 5 * sizeSlider.value;
+let arraySize = parseInt(TOTAL_WIDTH / (barWidth + margin + margin));
+
 let speed = 100 / speedSlider.value;
 
 speedSlider.oninput = function () {
-	speed = 100 / this.value;
+	speed = 500 / (this.value * this.value);
+};
+
+sizeSlider.oninput = function () {
+	value = 11 - this.value;
+	barWidth = 5 * value;
+	margin = 0.5 * value;
+	arraySize = parseInt(TOTAL_WIDTH / (barWidth + margin + margin));
+	generateChart();
 };
 
 async function sleep(milliseconds) {
@@ -22,16 +35,19 @@ newBtn.addEventListener("click", () => generateChart());
 function generateChart() {
 	while (chart.hasChildNodes()) chart.removeChild(chart.firstChild);
 	barArray = [];
-	for (let i = 0; i < ARRAY_SIZE; i++)
+	for (let i = 0; i < arraySize; i++)
 		barArray.push(Math.floor(Math.random() * 400) + 100);
 	drawChart();
 }
 
 function drawChart() {
-	for (let i = 0; i < ARRAY_SIZE; i++) {
+	for (let i = 0; i < arraySize; i++) {
 		const bar = document.createElement("div");
 		bar.classList.add("bar");
 		bar.style.height = `${barArray[i]}px`;
+		bar.style.width = `${barWidth}px`;
+		bar.style.marginLeft = `${margin}px`;
+		bar.style.marginRight = `${margin}px`;
 		chart.appendChild(bar);
 	}
 }
@@ -46,8 +62,8 @@ async function bubbleSort() {
 	console.log("Inside bubble sort");
 	let j;
 	const bars = chart.children;
-	for (let i = 0; i < ARRAY_SIZE; i++) {
-		for (j = 0; j < ARRAY_SIZE - i - 1; j++) {
+	for (let i = 0; i < arraySize; i++) {
+		for (j = 0; j < arraySize - i - 1; j++) {
 			const h1 = parseInt(bars[j].style.height);
 			const h2 = parseInt(bars[j + 1].style.height);
 			await sleep(speed);
@@ -56,10 +72,10 @@ async function bubbleSort() {
 				bars[j].style.height = bars[j + 1].style.height;
 				bars[j + 1].style.height = tmp;
 				bars[j + 1].style.backgroundColor = "red";
-				bars[j].style.backgroundColor = "black";
+				bars[j].style.backgroundColor = "var(--color-primary)";
 			} else {
 				bars[j + 1].style.backgroundColor = "red";
-				bars[j].style.backgroundColor = "black";
+				bars[j].style.backgroundColor = "var(--color-primary)";
 			}
 		}
 		bars[j].style.backgroundColor = "#00fd0a";
@@ -144,5 +160,5 @@ async function mergeSort() {
 		console.log(parray);
 	}
 
-	mergeSortRecursion(0, ARRAY_SIZE - 1);
+	mergeSortRecursion(0, arraySize - 1);
 }
