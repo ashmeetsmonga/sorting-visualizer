@@ -102,8 +102,6 @@ async function mergeSort() {
 		let k = l;
 
 		while (i < leftN && j < rightN) {
-			bars[i + leftStart].style.backgroundColor = "red";
-			bars[j + rightStart].style.backgroundColor = "red";
 			await sleep(speed);
 			let h1 = leftArray[i];
 			let h2 = rightArray[j];
