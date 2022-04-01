@@ -126,18 +126,18 @@ async function mergeSort() {
 				await sleep(speed);
 
 				bars[k].style.height = `${h2}px`;
-				// bars[k].style.backgroundColor = "#00fd0a";
-				// bars[i + leftStart].style.backgroundColor = "#00fd0a";
-				// bars[j + rightStart].style.backgroundColor = "#00fd0a";
+				bars[k].style.backgroundColor = "#00fd0a";
+				bars[i + leftStart].style.backgroundColor = "#00fd0a";
+				bars[j + rightStart].style.backgroundColor = "#00fd0a";
 				k++;
 				j++;
 			} else {
 				await sleep(speed);
 
 				bars[k].style.height = `${h1}px`;
-				// bars[k].style.backgroundColor = "#00fd0a";
-				// bars[i + leftStart].style.backgroundColor = "#00fd0a";
-				// bars[j + rightStart].style.backgroundColor = "#00fd0a";
+				bars[k].style.backgroundColor = "#00fd0a";
+				bars[i + leftStart].style.backgroundColor = "#00fd0a";
+				bars[j + rightStart].style.backgroundColor = "#00fd0a";
 				k++;
 				i++;
 			}
@@ -146,12 +146,12 @@ async function mergeSort() {
 
 		while (i < leftN) {
 			await sleep(speed);
-			// bars[k].style.backgroundColor = "#00fd0a";
+			bars[k].style.backgroundColor = "#00fd0a";
 			bars[k++].style.height = `${leftArray[i++]}px`;
 		}
 		while (j < rightN) {
 			await sleep(speed);
-			// bars[k].style.backgroundColor = "#00fd0a";
+			bars[k].style.backgroundColor = "#00fd0a";
 			bars[k++].style.height = `${rightArray[j++]}px`;
 		}
 		parray = [];
@@ -162,10 +162,6 @@ async function mergeSort() {
 	}
 
 	await mergeSortRecursion(0, arraySize - 1);
-	for (let i = 0; i < arraySize; i++) {
-		await sleep(5);
-		bars[i].style.backgroundColor = "#00fd0a";
-	}
 }
 
 quickSortBtn.addEventListener("click", () => quickSort());
@@ -176,9 +172,9 @@ async function quickSort() {
 	async function quickSortRecursion(l, r) {
 		if (l >= r) return;
 		let p = await partition(l, r);
-		// await sleep(speed);
+
 		await quickSortRecursion(l, p - 1);
-		// await sleep(speed);
+
 		await quickSortRecursion(p + 1, r);
 	}
 
@@ -187,14 +183,15 @@ async function quickSort() {
 		let i = l - 1;
 
 		for (let j = l; j < r; j++) {
+			await sleep(speed);
 			if (bars[j].style.height < pivot) {
 				i++;
 				let tmp = bars[i].style.height;
 				bars[i].style.height = bars[j].style.height;
 				bars[j].style.height = tmp;
-				await sleep(speed);
-				// bars[i].style.backgroundColor = "limegreen";
-				// bars[j].style.backgroundColor = "limegreen";
+
+				bars[i].style.backgroundColor = "#00fd0a";
+				bars[j].style.backgroundColor = "#00fd0a";
 			}
 		}
 
@@ -202,15 +199,11 @@ async function quickSort() {
 		bars[i + 1].style.height = bars[r].style.height;
 		bars[r].style.height = tmp;
 		await sleep(speed);
-		// bars[i + 1].style.backgroundColor = "limegreen";
-		// bars[r].style.backgroundColor = "limegreen";
+		bars[i + 1].style.backgroundColor = "#00fd0a";
+		bars[r].style.backgroundColor = "#00fd0a";
 
 		return i + 1;
 	}
 
 	await quickSortRecursion(0, arraySize - 1);
-	for (let i = 0; i < arraySize; i++) {
-		await sleep(5);
-		bars[i].style.backgroundColor = "#00fd0a";
-	}
 }
