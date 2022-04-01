@@ -2,6 +2,7 @@ const chart = document.getElementById("chart");
 const newBtn = document.getElementById("newBtn");
 const bubbleSortBtn = document.getElementById("bubbleSort");
 const mergeSortBtn = document.getElementById("mergeSort");
+const quickSortBtn = document.getElementById("quickSort");
 const speedSlider = document.getElementById("speedSlider");
 const sizeSlider = document.getElementById("sizeSlider");
 
@@ -161,4 +162,47 @@ async function mergeSort() {
 	}
 
 	mergeSortRecursion(0, arraySize - 1);
+}
+
+quickSortBtn.addEventListener("click", () => quickSort());
+
+async function quickSort() {
+	let bars = chart.children;
+
+	async function quickSortRecursion(l, r) {
+		if (l >= r) return;
+		let p = await partition(l, r);
+		// await sleep(speed);
+		await quickSortRecursion(l, p - 1);
+		// await sleep(speed);
+		await quickSortRecursion(p + 1, r);
+	}
+
+	async function partition(l, r) {
+		let pivot = bars[r].style.height;
+		let i = l - 1;
+
+		for (let j = l; j < r; j++) {
+			if (bars[j].style.height < pivot) {
+				i++;
+				let tmp = bars[i].style.height;
+				bars[i].style.height = bars[j].style.height;
+				bars[j].style.height = tmp;
+				await sleep(speed);
+				// bars[i].style.backgroundColor = "limegreen";
+				// bars[j].style.backgroundColor = "limegreen";
+			}
+		}
+
+		let tmp = bars[i + 1].style.height;
+		bars[i + 1].style.height = bars[r].style.height;
+		bars[r].style.height = tmp;
+		await sleep(speed);
+		// bars[i + 1].style.backgroundColor = "limegreen";
+		// bars[r].style.backgroundColor = "limegreen";
+
+		return i + 1;
+	}
+
+	quickSortRecursion(0, arraySize - 1);
 }
